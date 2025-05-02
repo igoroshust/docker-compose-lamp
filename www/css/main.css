@@ -1,0 +1,479 @@
+@import url('./reset.css');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap');
+
+
+:root {
+    --black: #171718;
+    --black-border: #26292D;
+    --white: #fff;
+    --purple: #5C62EC;
+    --nightmode-dark-bg: #272727;
+    --nightmode-night-bg:  #252526;
+
+    --dark-bg: var(--black);
+    --dark-border: --(--black-border);
+    --header-text: var(--white);
+    --accent: var(--purple);
+
+    /* Light mode (светлая тема) */
+    --page-bg: var(--white);
+    --text-color: var(--black);
+    --title-1: var(--accent);
+    --project-card-bg: var(--white);
+    --project-card-text: var(--black);
+    --box-shadow: 0px 5px 35px rgba(0, 0, 0, 0.25)
+}
+
+/* Тёмная тема */
+.night {
+    --page-bg: var(--nightmode-night-bg);
+    --text-color: var(--white);
+    --title-1: var(--white);
+
+    --project-card-bg: var(--black);
+    --project-card-text: var(--white);
+    --box-shadow: 0px 5px 35px rgba(0, 0, 0, 0.8)
+}
+
+html, body {
+    /* Footer sticky */ /* +++++ На Footer затем вешаем margin-top: auto; */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Чтобы body был оптимальной высоты и не обрывался на 100% экрана */
+
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: -0.5px;
+    /* color: var(--text-color); */
+
+    background-color: var(--page-bg);
+    color: var(--text-color);
+}
+
+img {
+    pointer-events: none;
+}
+
+.none {
+    display: none !important;
+}
+
+.container {
+    margin: 0 auto; /* Выравнивание по центру */
+    padding: 0 15px;
+
+    max-width: 1200px; /* Было 1170, +30 из-за padding. max-width чтобы при адаптации контент помещался */
+}
+
+/* Кнопка (download cv) */
+.btn {
+    display: inline-block; /* Для работы с размерами ссылки переводим в inline-block */
+    height: 48px;
+    padding: 12px 28px;
+
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--accent);
+
+    letter-spacing: 0.15px;
+    font-size: clamp(0.875rem, 0.732rem + 0.36vw, 1rem); /* от 16 до 14 */
+    font-weight: 500;
+
+    transition: opacity 0.2s ease-in;
+}
+
+.btn:hover, .btn-outline:hover {
+    opacity: 0.8;
+}
+
+.btn:active, .btn-outline:active {
+    position: relative;
+    top: 1px;
+}
+
+/* Кнопка outline (github repo inside page) */
+.btn-outline {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+
+    padding: 12px 20px;
+    height: 48px;
+
+    border-radius: 5px;
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    color: var(--black);
+}
+
+/* General */
+.section {
+    padding: 70px 0;
+}
+
+.title-1 {
+    margin-bottom: 60px;
+
+    font-size: clamp(2.5rem, 1.071rem + 3.57vw, 3.75rem); /* от 60 до 40 */
+    font-weight: 700;
+
+    line-height: 1.3;
+    color: var(--title-1);
+    text-align: center;
+}
+
+.title-2 {
+    margin-bottom: 20px;
+
+    font-size: clamp(1.875rem, 1.161rem + 1.79vw, 2.5rem); /* от 40 до 30 */
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+
+/* Nav */
+.nav {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--black-border);
+    background-color: var(--dark-bg);
+    color: var(--white);
+
+    letter-spacing: normal;
+}
+
+.nav-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 40px;
+    row-gap: 30px; /* Для мобильной адаптации в 2 строки */
+    flex-wrap: wrap;
+}
+
+
+.nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    align-items: center;
+    column-gap: 40px;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.nav-list__link {
+    color: inherit;
+    transition: opacity 0.2s ease-in;
+}
+
+.nav-list__link:hover {
+    opacity: 0.8;
+}
+
+.nav-list__link--active {
+    position: relative;
+}
+
+.nav-list__link--active::before {
+    content: "";
+
+    display: block;
+    height: 2px;
+    width: 100%;
+
+    position: absolute;
+    left: 0;
+    top: 100%; /* Прижимаем линию к низу страницы. Линия по внизу по размеру ссылки */
+
+    background-color: var(--purple);
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    color: inherit;
+
+    margin-right: auto; /* Прижимаем логотип к левому краю */
+}
+
+.logo strong {
+    font-weight: 700;
+}
+
+/* Nightmode button */
+.night-mode-btn {
+    order: 9;
+
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    width: 51px;
+    height: 26px;
+    padding: 5px;
+
+    border-radius: 50px;
+    background-color: var(--nightmode-dark-bg);
+}
+
+.night-mode-btn::before {
+    content: "";
+    display: block;
+
+    position: absolute; /* Для сохранение размеров элемента и его дальнейшего перемещения */
+    /* Круг внутри блока */
+    top: 1px;
+    left: 1px;
+
+    width: 24px;
+    height: 24px;
+
+    border-radius: 50%;
+    background-color: var(--white);
+
+    transition: left 0.2s ease-in;
+}
+
+.night-mode-btn--active::before { /* Активный класс. Кружочек остаётся, меняется расположение */
+    left: 26px;
+}
+
+.night-mode-btn__icon {
+    position: relative; /* Чтобы картинка была видна внутри белого круга */
+    z-index: 9;
+}
+
+/* Header */
+.header {
+    padding: 40px 0; /* Сделано, чтобы в случае объемного контента содержимое не подходило вплотную в навигации */
+    min-height: 695px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: var(--header-text);
+
+    background-color: var(--dark-bg);
+    background-image: url('./../img/index/Abstract.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center center; /* Центрируем по горизонтали и по вертикали */
+}
+
+.header__wrapper {
+    padding: 0 15px; /* Отступ для мобильных устройств */
+    max-width: 660px; /* 630 + 30 (padding 15+15) */
+}
+
+.header__title {
+    margin-bottom: 20px;
+
+    font-size: clamp(1.875rem, 1.161rem + 1.79vw, 2.5rem); /* от 40 до 30*/
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.header__title strong {
+    font-size: clamp(2.5rem, 1.071rem + 3.57vw, 3.75rem); /* от 60 до 40 */
+    font-weight: 700;
+}
+
+.header__title em {
+    font-style: normal; /* Убираем курсив с тега em */
+    color: var(--accent);
+}
+
+.header__text {
+    margin-bottom: 40px;
+
+    font-size: clamp(0.875rem, 0.589rem + 0.71vw, 1.125rem); /* от 18 до 14 */
+    line-height: 1.333; /* 24 */
+}
+
+.header__text p + p {
+    margin-top: 0.5em; /* Отступ у каждого последующего параграфа, кроме первого */
+}
+
+
+
+/* Projects Section */
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 30px;
+    row-gap: 30px;
+
+    justify-content: center; /* Обязательно нужно указать для размещения карточек по центру */
+}
+
+.project {
+    max-width: 370px; /* max-width для адаптива */
+    background-color: var(--project-card-bg);
+
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+}
+
+
+
+.project__img {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.project__title {
+    padding: 15px 20px 25px; /* сверху, слева-справа, снизу */
+    font-size: clamp(1.25rem, 0.964rem + 0.71vw, 1.5rem); /* от 24 до 20 */
+    font-weight: 700;
+    line-height: 1.3; /* 130% */
+
+    color: var(--project-card-text);
+}
+
+
+/* Project Details */
+.project-details {
+    margin: 0 auto; /* Блок с картинкой и текстом по центру */
+    max-width: 865.38px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+.project-details__cover {
+    max-width: 100%; /* Уменьшение размера картинки при сужении блока project-details */
+    margin-bottom: 40px;
+
+    border-radius: 10px;
+    box-shadow: 0px 5px 35px rgba(0, 0, 0, 0.25);
+}
+
+.project-details__desc {
+    margin-bottom: 30px;
+
+    font-size: clamp(1.125rem, 0.696rem + 1.07vw, 1.5rem); /* от 24 до 18 */
+    font-weight: 700;
+
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+}
+
+.project-details__desc p + p {
+    margin-top: 0.5em;
+}
+
+/* Content List */
+.content-list {
+    margin: 0 auto; /* блок по центру */
+    max-width: 570px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 40px;
+
+    text-align: center;
+}
+
+.content-list a {
+    color: var(--accent);
+}
+
+.content-list__item {
+    font-size: clamp(1rem, 0.857rem + 0.36vw, 1.125rem); /* от 18 до 16 */
+    line-height: 1.5;
+}
+
+.content-list__item p + p{
+    margin-top: 0.5em;
+}
+
+
+
+/* Footer */
+.footer {
+    margin-top: auto;
+    padding: 60px 0 50px; /* Сверху, слева-справа, снизу */
+
+    background-color: var(--dark-bg);
+    color: var(--header-text);
+}
+
+.footer__wrapper {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    row-gap: 27px;
+}
+
+.social {
+    display: flex;
+    column-gap: 30px;
+
+    align-items: center;
+}
+
+.copyright {
+    font-size: clamp(0.875rem, 0.732rem + 0.36vw, 1rem); /* от 16 до 14 */
+}
+
+.copyright p + p {
+    margin-top: 0.5em; /* Предусматриваем отсупы при наличии других абзацев */
+}
+
+/* Media */
+@media (max-width: 620px) {
+    .header {
+        min-height: unset; /* Убираем min-height, чтобы шапка была по мере контента */
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .title-1 {
+        margin-bottom: 30px;
+    }
+
+    .title-2 {
+        margin-bottom: 10px;
+    }
+
+    /* Nav */
+    .nav-row {
+        justify-content: space-between;
+    }
+
+    .night-mode-btn {
+        order: 0; /* Расположение кнопки под заголовком */
+    }
+
+    /* Skills */
+    .content-list {
+        row-gap: 20px;
+    }
+
+    /* Project Page */
+    .project-details__desc {
+        margin-bottom: 20px;
+    }
+
+    /* Footer */
+        .footer {
+        padding: 40px 0 30px; /* сверху, слева-справа, снизу */
+    }
+
+    .social {
+        column-gap: 20px;
+    }
+
+    .social__item {
+        width: 28px; /* Уменьшаем размер иконок */
+    }
+}
